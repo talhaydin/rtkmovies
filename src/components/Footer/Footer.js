@@ -1,7 +1,13 @@
-import React from 'react'
+import React from "react";
+import "./Footer.scss";
 
-export default function Footer() {
+const Footer = () => {
   return (
-    <div>Footer</div>
-  )
-}
+    <div className="footer">
+      <div>Movie App</div>
+      <div>©2022, Talha Aydin</div>
+    </div>
+  );
+};
+
+export default Footer;
