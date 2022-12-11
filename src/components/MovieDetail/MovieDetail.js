@@ -28,7 +28,7 @@ export default function MovieDetail() {
   return (
     <div className="movie-section">
       {Object.keys(movie).length === 0 ? (
-        <div>...Loadijng</div>
+        <div>...Loading</div>
       ) : (
         <>
           <div className="section-left">
