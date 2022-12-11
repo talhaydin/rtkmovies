@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div className="footer">
       <div>Dizzney Crust</div>
-      <div>©2022, Talha Aydin</div>
+      <div>©2022</div>
     </div>
   );
 };
