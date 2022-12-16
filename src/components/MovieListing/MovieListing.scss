@@ -4,14 +4,13 @@
 .show-list {
   margin: 20px 0px;
   h2 {
+    margin-left: 12px;
     color: $font-secondary;
     margin-bottom: 10px;
     font-weight: 400;
   }
 }
 
-.movie-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  grid-gap: 15px;
+.error {
+  color: white;
 }
