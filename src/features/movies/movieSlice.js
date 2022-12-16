@@ -4,24 +4,21 @@ import { APIKEY } from "../../common/apis/movieApiKey";
 
 export const fetchAsyncMovies = createAsyncThunk(
   "movies/fetchAsyncMovies",
-  async () => {
-    const movieText = "Star";
+  async (searchTerm) => {
     const response = await movieApi.get(
-      `?apiKey=${APIKEY}&s=${movieText}&type=movie`
+      `?apiKey=${APIKEY}&s=${searchTerm}&type=movie`
     );
-    console.log(response.data);
+
     return response.data;
   }
 );
 
 export const fetchAsyncShows = createAsyncThunk(
   "movies/fetchAsyncShows",
-  async () => {
-    const showsText = "Star Wars";
+  async (searchTerm) => {
     const response = await movieApi.get(
-      `?apiKey=${APIKEY}&s=${showsText}&type=series`
+      `?apiKey=${APIKEY}&s=${searchTerm}&type=series`
     );
-    console.log(response.data);
     return response.data;
   }
 );
@@ -30,12 +27,12 @@ export const fetchDetails = createAsyncThunk(
   "movies/fetchDetails",
   async (id) => {
     const response = await movieApi.get(`?apiKey=${APIKEY}&i=${id}&Plot=full`);
-    console.log(response.data);
     return response.data;
   }
 );
 
 const initialState = {
+  loading: false,
   movies: {},
   shows: {},
   detail: {},
@@ -45,23 +42,22 @@ const movieSlice = createSlice({
   name: "movies",
   initialState,
   reducers: {
+    setLoading: (state, action) => {
+      state.loading = action.payload;
+    },
     clearDetails: (state) => {
       state.detail = {};
     },
   },
   extraReducers: {
     [fetchAsyncMovies.pending]: (state, action) => {
-      console.log("pending");
+      return { ...state, loading: true };
     },
     [fetchAsyncMovies.fulfilled]: (state, { payload }) => {
-      console.log("fulfilled");
-      return { ...state, movies: payload };
+      return { ...state, movies: payload, loading: false };
     },
-    [fetchAsyncMovies.rejected]: () => {
-      console.log("rejected");
-    },
+    [fetchAsyncMovies.rejected]: () => {},
     [fetchAsyncShows.fulfilled]: (state, { payload }) => {
-      console.log("fulfilled");
       return { ...state, shows: payload };
     },
     [fetchDetails.fulfilled]: (state, { payload }) => {
@@ -70,8 +66,9 @@ const movieSlice = createSlice({
   },
 });
 
-export const { clearDetails } = movieSlice.actions;
+export const { clearDetails, setLoading } = movieSlice.actions;
 export const getAllMovies = (state) => state.movies.movies;
 export const getAllShows = (state) => state.movies.shows;
 export const getDetail = (state) => state.movies.detail;
+export const getLoading = (state) => state.movies.loading;
 export default movieSlice.reducer;
