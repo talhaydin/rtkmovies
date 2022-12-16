@@ -9,8 +9,8 @@ import {
 export default function Home() {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchAsyncMovies());
-    dispatch(fetchAsyncShows());
+    dispatch(fetchAsyncMovies("Harry"));
+    dispatch(fetchAsyncShows("Star Wars"));
   }, [dispatch]);
   return (
     <div>
