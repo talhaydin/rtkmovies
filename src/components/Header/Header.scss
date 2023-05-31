@@ -36,12 +36,13 @@ form {
     font-size: 20px;
     cursor: pointer;
     height: 40px;
+    border-radius: 5px;
   }
 }
 
 input {
   font-size: 18px;
   width: 100%;
+  border-radius: 5px;
   padding: 5px 5px 5px 10px;
-  outline: none;
 }
